@@ -9,8 +9,7 @@ build_and_run() {
     if cmake ..; then
         if make -j"$(nproc)"; then
                 cd Reshape || exit
-                ./Reshape
-            echo "Reshape Build successful"
+                ./Reshape "$@"
         else
             echo "Reshape Make failed."
             exit 1
@@ -23,4 +22,4 @@ build_and_run() {
 
 notify-send -a "Reshape" "Begin build."
 
-build_and_run "$1"
+build_and_run "$@"
