@@ -1,6 +1,9 @@
 // Copyright (c) 2025-present, Rusu Alexei & Forge contributors.
 // Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
+#ifndef LOG_H
+#define LOG_H
+
 #include <memory>
 #include <string>
 
@@ -53,3 +56,4 @@ private:
 };
 
 } // namespace forge
+#endif

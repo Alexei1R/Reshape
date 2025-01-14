@@ -2,6 +2,7 @@
 // Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 #include "Application.h"
+#include "Forge/Renderer/Shader.h"
 
 #include <glad/glad.h>
 // without this comnet lsp may swap them
@@ -12,6 +13,9 @@ namespace reshape {
 Application::Application() {
     forge::Log::Info("Application constructor");
     m_Window = forge::Window::Create();
+
+    m_Shader = forge::Shader::Create("/home/toor/Code/Reshape/shaders/main.glsl", forge::ShaderOrigin::File);
+
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         forge::Log::Critical("GLAD error");
         return;

@@ -27,12 +27,22 @@ target_link_libraries(${TARGET} PUBLIC
     spdlog 
     fmt         
     glfw
-    glad
     shaderc_combined
     glslang
     SPIRV-Tools
     SPIRV-Tools-opt
 )
+
+# Conditional dependencies
+if(RESHAPE_ADD_SUPPORT_OPENGL)
+    target_link_libraries(${TARGET} PUBLIC glad)
+endif()
+
+if(RESHAPE_ADD_SUPPORT_VULKAN)
+    target_link_libraries(${TARGET} PUBLIC 
+        vulkan
+    )
+endif()
 
 #-------------------------------------------------------------------------------
 # Profiling Configuration (Optional)

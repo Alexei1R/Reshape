@@ -9,6 +9,7 @@
 #include "Utils/Platform.h"
 #include "Utils/Profiling.h"
 
+#include "Renderer/Shader.h"
 #include "Renderer/Window.h"
 
 #endif

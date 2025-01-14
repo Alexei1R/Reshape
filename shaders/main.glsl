@@ -1,3 +1,5 @@
+#name test
+
 #type vertex
 
 #version 450 core

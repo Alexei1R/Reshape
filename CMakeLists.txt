@@ -27,8 +27,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Platform-specific support options
 option(RESHAPE_ADD_SUPPORT_OPENGL "Enable OpenGL support" ON)
-option(RESHAPE_ADD_SUPPORT_METAL "Enable Metal support for macOS/iOS" OFF)
 option(RESHAPE_ADD_SUPPORT_VULKAN "Enable Vulkan support" OFF)
+option(RESHAPE_ADD_SUPPORT_METAL "Enable Metal support for macOS/iOS" OFF)
 option(RESHAPE_ADD_SUPPORT_DIRECTX "Enable DirectX support" OFF)
 
 

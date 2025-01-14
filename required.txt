@@ -1,2 +1,4 @@
 clang
 cmake
+
+vulkan-devel vulkan-headers vulkan-validation-layers vulkan-tools

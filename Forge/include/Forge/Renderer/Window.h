@@ -22,7 +22,7 @@ struct WindowDescriptor {
     bool resizable;
     bool fullscreen;
 
-    WindowDescriptor(uint32_t width = 1080, uint32_t height = 720, std::string name = "Forge", bool resizable = true,
+    WindowDescriptor(uint32_t width = 1080, uint32_t height = 720, std::string name = "Reshape", bool resizable = true,
                      bool fullscreen = false)
         : width(width)
         , height(height)
@@ -52,8 +52,14 @@ public:
 
 protected:
     Window() = default;
+
+    // NOTE: Delete copy operations
     Window(const Window&) = delete;
     Window& operator=(const Window&) = delete;
+
+    // NOTE: Allow move operations
+    Window(Window&&) noexcept = default;
+    Window& operator=(Window&&) noexcept = default;
 };
 } // namespace forge
 

@@ -24,7 +24,6 @@ DefaultWindow::DefaultWindow(const WindowDescriptor& descriptor) {
 
     m_Window = glfwCreateWindow(m_Data.width, m_Data.height, m_Data.name.c_str(), nullptr, nullptr);
     FORGE_ASSERT(m_Window, "ERROR to create window")
-    Log::Info("Creating OpenGLWindow: {0},{1}:{2}", m_Data.name, m_Data.width, m_Data.height);
     glfwMakeContextCurrent(m_Window);
 
     glfwSetWindowUserPointer(m_Window, &m_Data);

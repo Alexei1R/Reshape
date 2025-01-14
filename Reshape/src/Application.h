@@ -17,6 +17,7 @@ public:
 
 private:
     Shared<forge::Window> m_Window;
+    Shared<forge::Shader> m_Shader;
     unsigned int m_VAO{0};
     unsigned int m_VBO{0};
 };
