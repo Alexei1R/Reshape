@@ -5,19 +5,34 @@
 #define OPENGLSHADER_H
 
 #include "Forge/Renderer/Shader.h"
+#include <unordered_map>
 #include <vector>
+
+#include <glad/glad.h>
 
 namespace forge {
 
 class OpenGLShader final : public Shader {
 public:
-    OpenGLShader(const std::string& data, const ShaderOrigin origin) noexcept;
-    ~OpenGLShader();
+    explicit OpenGLShader(std::unordered_map<ShaderType, std::vector<uint32_t>>& shaderSPIRV) noexcept;
+    ~OpenGLShader() override;
+
+    // Delete copy operations
+    OpenGLShader(const OpenGLShader&) = delete;
+    OpenGLShader& operator=(const OpenGLShader&) = delete;
+
+    // Allow move operations
+    OpenGLShader(OpenGLShader&&) noexcept = default;
+    OpenGLShader& operator=(OpenGLShader&&) noexcept = default;
 
     void Bind() const override;
     void UnBind() const override;
 
-    void SaveSPIRVToFile(const std::vector<uint32_t>& spirvBinary, const std::string& filename) const;
+    [[nodiscard]] inline unsigned int GetProgramID() const noexcept { return m_ProgramID; }
+
+private:
+    [[nodiscard]] unsigned int CompileShader(const std::string& source, GLenum shaderType);
+    [[nodiscard]] unsigned int LinkShaders(const std::vector<unsigned int>& shaderIDs);
 
 private:
     unsigned int m_ProgramID{0};

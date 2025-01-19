@@ -14,17 +14,19 @@ Application::Application() {
     forge::Log::Info("Application constructor");
     m_Window = forge::Window::Create();
 
-    m_Shader = forge::Shader::Create("/home/toor/Code/Reshape/shaders/main.glsl", forge::ShaderOrigin::File);
-
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         forge::Log::Critical("GLAD error");
         return;
     }
 
     {
-
-        // Define the triangle vertices
-        const float vertices[] = {0.0f, 0.5f, 0.0f, -0.5f, -0.5f, 0.0f, 0.5f, -0.5f, 0.0f};
+        // Define the triangle vertices with positions and texture coordinates
+        const float vertices[] = {
+            // positions      // texture coords
+             0.0f,  0.5f, 0.0f,  0.5f, 1.0f,   // top
+            -0.5f, -0.5f, 0.0f,  0.0f, 0.0f,   // bottom left
+             0.5f, -0.5f, 0.0f,  1.0f, 0.0f    // bottom right
+        };
 
         glGenVertexArrays(1, &m_VAO);
         glGenBuffers(1, &m_VBO);
@@ -34,12 +36,19 @@ Application::Application() {
         glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+        // Position attribute
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
         glEnableVertexAttribArray(0);
+
+        // Texture coord attribute
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
     }
+
+    m_Shader = forge::Shader::Create("/home/toor/Code/Reshape/shaders/main.glsl", forge::ShaderOrigin::File);
 }
 
 Application::~Application() {
@@ -58,6 +67,7 @@ void Application::Run() {
 
         glClearColor(0.1f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+        m_Shader->Bind();
 
         glBindVertexArray(m_VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);

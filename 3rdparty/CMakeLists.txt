@@ -49,6 +49,12 @@ if(EXISTS ${SHADERC_SUBMODULE_DIR} AND NOT EXISTS "${SHADERC_SUBMODULE_DIR}/thir
 endif()
 
 
+
+set(SPIRV_CROSS_GITHUB_REPO "https://github.com/KhronosGroup/SPIRV-Cross")
+set(SPIRV_CROSS_SUBMODULE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/SPIRV-Cross")
+check_and_clone_library(spirv-cross ${SPIRV_CROSS_GITHUB_REPO} ${SPIRV_CROSS_SUBMODULE_DIR})
+
+
 # OpenGL Support
 if(RESHAPE_ADD_SUPPORT_OPENGL)
     if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/glad")
@@ -58,6 +64,7 @@ if(RESHAPE_ADD_SUPPORT_OPENGL)
     add_subdirectory(glad)
     
 endif()
+
 
 # Vulkan Support
 if(RESHAPE_ADD_SUPPORT_VULKAN)

@@ -5,6 +5,7 @@
 #define FORGE_HPP
 
 #include "Utils/Common.h"
+#include "Utils/FileSystem.h"
 #include "Utils/Log.h"
 #include "Utils/Platform.h"
 #include "Utils/Profiling.h"

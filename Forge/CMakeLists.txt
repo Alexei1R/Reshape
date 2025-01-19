@@ -31,6 +31,12 @@ target_link_libraries(${TARGET} PUBLIC
     glslang
     SPIRV-Tools
     SPIRV-Tools-opt
+    #
+    spirv-cross-cpp 
+    spirv-cross-glsl 
+    spirv-cross-hlsl 
+    spirv-cross-msl 
+    spirv-cross-reflect
 )
 
 # Conditional dependencies

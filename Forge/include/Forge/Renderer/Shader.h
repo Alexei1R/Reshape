@@ -7,6 +7,8 @@
 #include "Forge/Utils/Common.h"
 #include <cstdint>
 #include <string>
+#include <vector>
+
 namespace forge {
 
 enum class ShaderType {

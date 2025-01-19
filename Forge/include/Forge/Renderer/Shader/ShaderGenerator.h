@@ -13,8 +13,6 @@
 
 namespace forge {
 
-// NOTE: To not foget , to make a .chache , for each platform where i will put the shader compiled binary files
-
 class ShaderSPIRVGenerator {
 public:
     ShaderSPIRVGenerator() = default;

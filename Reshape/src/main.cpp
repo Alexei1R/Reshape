@@ -4,10 +4,12 @@
 #include "Forge/Forge.hpp"
 
 #include "Application.h"
+#include "Forge/Utils/FileSystem.h"
 #include "Utils/Parsing.h"
 
 int main(int argc, char* argv[]) {
     forge::Log::Init("Reshape");
+    forge::FileSystem::Init("Reshape");
 
     {
         // TODO: Cleanup this code later

@@ -1,8 +1,10 @@
 // Copyright (c) 2025-present, Rusu Alexei & Forge contributors.
 // Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
-#include "ShaderGenerator.h"
+#include "Forge/Renderer/Shader/ShaderGenerator.h"
 #include "Forge/Utils/ErrorCodes.h"
+#include "Forge/Utils/Log.h"
+#include <iostream>
 
 namespace forge {
 

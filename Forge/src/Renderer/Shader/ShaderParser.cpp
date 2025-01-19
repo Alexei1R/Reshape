@@ -1,12 +1,14 @@
 // Copyright (c) 2025-present, Rusu Alexei & Forge contributors.
 // Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
-#include "ShaderParser.h"
 #include "Forge/Renderer/Shader.h"
+#include "Forge/Renderer/Shader/ShaderParser.h"
 #include "Forge/Utils/Common.h"
+#include "Forge/Utils/Log.h"
 #include <algorithm>
 #include <filesystem>
 #include <fstream>
+#include <sstream>
 
 namespace forge {
 
