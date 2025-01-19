@@ -23,9 +23,9 @@ Application::Application() {
         // Define the triangle vertices with positions and texture coordinates
         const float vertices[] = {
             // positions      // texture coords
-             0.0f,  0.5f, 0.0f,  0.5f, 1.0f,   // top
-            -0.5f, -0.5f, 0.0f,  0.0f, 0.0f,   // bottom left
-             0.5f, -0.5f, 0.0f,  1.0f, 0.0f    // bottom right
+            0.0f,  0.5f,  0.0f, 0.5f, 1.0f, // top
+            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, // bottom left
+            0.5f,  -0.5f, 0.0f, 1.0f, 0.0f  // bottom right
         };
 
         glGenVertexArrays(1, &m_VAO);
@@ -49,6 +49,17 @@ Application::Application() {
     }
 
     m_Shader = forge::Shader::Create("/home/toor/Code/Reshape/shaders/main.glsl", forge::ShaderOrigin::File);
+    m_Shader->Bind();
+
+    for (const auto& input : m_Shader->GetStageInputs()) {
+        forge::Log::Info("Vertex attribute: {} at location {}, size {}", input.name, input.location, input.size);
+    }
+
+    if (m_Shader->HasUniformBuffer("SceneData")) {
+        if (auto* ubo = m_Shader->FindResource("SceneData")) {
+            forge::Log::Info("SceneData UBO size: {} bytes", ubo->size);
+        }
+    }
 }
 
 Application::~Application() {
