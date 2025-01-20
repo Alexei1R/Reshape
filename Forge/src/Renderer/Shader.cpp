@@ -87,7 +87,6 @@ std::unordered_map<ShaderType, std::vector<uint32_t>> GenerateAndCacheSPIRV(cons
                     spirv.resize(size / sizeof(uint32_t));
                     inFile.read(reinterpret_cast<char*>(spirv.data()), size);
                     spirvBinaries[type] = std::move(spirv);
-                    Log::Trace("Loaded cached SPIR-V shader: {}", shaderCachePath.string());
                     continue;
                 }
             } catch (const std::exception& e) {

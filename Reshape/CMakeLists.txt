@@ -1,4 +1,3 @@
-
 #-------------------------------------------------------------------------------
 #  RESHAPE CONFIGURATION
 #-------------------------------------------------------------------------------
@@ -23,6 +22,10 @@ add_executable(${TARGET}
 # Link dependencies
 target_link_libraries(${TARGET} PRIVATE 
     Forge
+)
+
+target_compile_definitions(${TARGET} PRIVATE 
+    ROOT_PATH="${ROOT_PATH}"
 )
 
 

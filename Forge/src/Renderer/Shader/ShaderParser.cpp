@@ -1,8 +1,8 @@
 // Copyright (c) 2025-present, Rusu Alexei & Forge contributors.
 // Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
-#include "Forge/Renderer/Shader.h"
 #include "Forge/Renderer/Shader/ShaderParser.h"
+#include "Forge/Renderer/Shader.h"
 #include "Forge/Utils/Common.h"
 #include "Forge/Utils/Log.h"
 #include <algorithm>
@@ -88,7 +88,6 @@ ErrorResult ShaderParser::ParseString(const std::string& shader) noexcept {
             auto it = m_ShaderTypeMap.find(typeName);
             if (it != m_ShaderTypeMap.end()) {
                 currentShaderType = it->second;
-                Log::Trace("Found shader type: {}", typeName);
             } else {
                 Log::Critical("Unknown shader type: {}", typeName);
                 return ErrorCode::InvalidArgument;
@@ -97,7 +96,6 @@ ErrorResult ShaderParser::ParseString(const std::string& shader) noexcept {
         // Check for the #name directive
         else if (line.rfind("#name", 0) == 0) { // If line starts with #name
             m_ShaderName = line.substr(6);      // Get the name after #name
-            Log::Trace("Found shader name: {}", m_ShaderName);
         } else {
             // MOTE: If the current line is not a type add it to the shader
             if (currentShaderType != ShaderType::Unknown) {

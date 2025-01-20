@@ -111,6 +111,10 @@ message(STATUS "C++ Compiler: ${CMAKE_CXX_COMPILER_ID}")
 message(STATUS "Base Compiler Flags: ${CMAKE_CXX_FLAGS}")
 message(STATUS "Build-Specific Flags: ${CMAKE_CXX_FLAGS_${CMAKE_BUILD_TYPE}}")
 
+
+# Root path
+set(ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR})
+
 #-------------------------------------------------------------------------------
 # Targets / Subdirectories
 #-------------------------------------------------------------------------------

@@ -48,7 +48,7 @@ Application::Application() {
         glBindVertexArray(0);
     }
 
-    m_Shader = forge::Shader::Create("/home/toor/Code/Reshape/shaders/main.glsl", forge::ShaderOrigin::File);
+    m_Shader = forge::Shader::Create("shaders/main.glsl", forge::ShaderOrigin::File);
     m_Shader->Bind();
 
     for (const auto& input : m_Shader->GetStageInputs()) {

@@ -5,11 +5,19 @@
 
 #include "Application.h"
 #include "Forge/Utils/FileSystem.h"
+#include "Forge/Utils/Log.h"
 #include "Utils/Parsing.h"
 
 int main(int argc, char* argv[]) {
     forge::Log::Init("Reshape");
     forge::FileSystem::Init("Reshape");
+
+    std::filesystem::path rootPath = ROOT_PATH;
+    try {
+        std::filesystem::current_path(rootPath);
+    } catch (const std::filesystem::filesystem_error& ex) {
+        forge::Log::Critical("Error setting current path:  {0}", ex.what());
+    }
 
     {
         // TODO: Cleanup this code later

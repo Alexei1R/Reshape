@@ -22,6 +22,7 @@ std::string FileSystem::s_ApplicationName;
 bool FileSystem::s_Initialized = false;
 
 void FileSystem::Init(const std::string& applicationName) {
+    PROJECT_ROOT_DIR
     if (s_Initialized) {
         Log::Warn("FileSystem already initialized!");
         return;
