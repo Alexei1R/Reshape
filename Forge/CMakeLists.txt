@@ -27,6 +27,7 @@ target_link_libraries(${TARGET} PUBLIC
     spdlog 
     fmt         
     glfw
+    glm
     shaderc_combined
     glslang
     SPIRV-Tools

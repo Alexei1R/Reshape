@@ -2,6 +2,7 @@
 // Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 #include "Application.h"
+#include "Forge/Renderer/GraphicsContext.h"
 #include "Forge/Renderer/Shader.h"
 
 #include <glad/glad.h>
@@ -14,10 +15,8 @@ Application::Application() {
     forge::Log::Info("Application constructor");
     m_Window = forge::Window::Create();
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        forge::Log::Critical("GLAD error");
-        return;
-    }
+    m_Context = forge::GraphicsContext::Create(m_Window);
+    m_RenderAPI = forge::RenderAPI::Create();
 
     {
         // Define the triangle vertices with positions and texture coordinates
@@ -76,8 +75,12 @@ void Application::Run() {
         m_Window->Update();
         PROFILE_SCOPE("Main Loop");
 
-        glClearColor(0.1f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        forge::ClearState clearState;
+        clearState.color = {0.1f, 0.1f, 0.1f, 1.0f};
+        clearState.clearColor = true;
+        clearState.clearDepth = true;
+        m_RenderAPI->Clear(clearState);
+
         m_Shader->Bind();
 
         glBindVertexArray(m_VAO);

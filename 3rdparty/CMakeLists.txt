@@ -22,6 +22,10 @@ check_and_clone_library(glfw ${GLFW_GITHUB_REPO} ${GLFW_SUBMODULE_DIR})
 
 
 
+set(GLM_GITHUB_REPO "https://github.com/g-truc/glm.git")
+set(GLM_SUBMODULE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/glm")
+check_and_clone_library(glm ${GLM_GITHUB_REPO} ${GLM_SUBMODULE_DIR})
+
 set(SHADERC_SKIP_TESTS ON)
 set(SHADERC_GITHUB_REPO "https://github.com/google/shaderc.git")
 set(SHADERC_SUBMODULE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/shaderc")

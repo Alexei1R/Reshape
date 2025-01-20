@@ -10,6 +10,7 @@
 #include "Utils/Platform.h"
 #include "Utils/Profiling.h"
 
+#include "Forge/Renderer/RenderAPI.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Window.h"
 

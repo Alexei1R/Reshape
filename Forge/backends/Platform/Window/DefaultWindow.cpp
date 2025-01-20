@@ -1,8 +1,6 @@
 // Copyright (c) 2025-present, Rusu Alexei & Forge contributors.
 // Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
-#include "Forge/Utils/Log.h"
-
 #include "DefaultWindow.h"
 
 namespace forge {
