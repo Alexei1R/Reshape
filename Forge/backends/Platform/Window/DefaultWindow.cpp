@@ -2,6 +2,8 @@
 // Distributed under the MIT License (http://opensource.org/licenses/MIT)
 
 #include "DefaultWindow.h"
+#include "Forge/Events/Event.h"
+#include "Forge/Events/ImplEvent.h"
 
 namespace forge {
 
@@ -43,4 +45,131 @@ void DefaultWindow::EnableVSync(bool enable) {
     }
 }
 
+void DefaultWindow::SetCallBackEvents() {
+    // NOTE: Set GLFW callbacks
+    glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        data.width = width;
+        data.height = height;
+
+        WindowEvent event(width, height, Action::Resize);
+        data.eventCallback(event);
+    });
+    glfwSetWindowPosCallback(m_Window, [](GLFWwindow* window, int xPos, int yPos) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        WindowEvent event(xPos, yPos, Action::Move);
+        data.eventCallback(event);
+    });
+
+    glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        WindowEvent event(0, 0, Action::Close);
+        data.eventCallback(event);
+    });
+
+    glfwSetWindowFocusCallback(m_Window, [](GLFWwindow* window, int focused) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        Action action = focused ? Action::Focus : Action::LoseFocus;
+        WindowEvent event(0, 0, action);
+        data.eventCallback(event);
+    });
+
+    glfwSetWindowIconifyCallback(m_Window, [](GLFWwindow* window, int iconified) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        Action action = iconified ? Action::Iconify : Action::Restore;
+        WindowEvent event(0, 0, action);
+        data.eventCallback(event);
+    });
+
+    glfwSetWindowMaximizeCallback(m_Window, [](GLFWwindow* window, int maximized) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        Action action = maximized ? Action::Maximize : Action::Restore;
+        WindowEvent event(0, 0, action);
+        data.eventCallback(event);
+    });
+
+    glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+        WindowEvent event(width, height, Action::FramebufferResize);
+        data.eventCallback(event);
+    });
+
+    //
+    // Key Events
+    //
+
+    glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+        switch (action) {
+        case GLFW_PRESS: {
+            KeyEvent event(key, Action::KeyPress);
+            data.eventCallback(event);
+
+            break;
+        }
+        case GLFW_RELEASE: {
+            KeyEvent event(key, Action::KeyRelease);
+            data.eventCallback(event);
+            break;
+        }
+        case GLFW_REPEAT: {
+            KeyEvent event(key, Action::KeyRepeat);
+            data.eventCallback(event);
+            break;
+        }
+        }
+    });
+
+    glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+        KeyEvent event(keycode, Action::RegisterKeyChar);
+        data.eventCallback(event);
+    });
+
+    glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+        switch (action) {
+        case GLFW_PRESS: {
+            KeyEvent event(button, Action::KeyPress);
+            data.eventCallback(event);
+            break;
+        }
+        case GLFW_RELEASE: {
+            KeyEvent event(button, Action::KeyRelease);
+            data.eventCallback(event);
+            break;
+        }
+        }
+    });
+
+    glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+        MouseEvent event(xOffset, yOffset, Action::MouseScroll);
+        data.eventCallback(event);
+    });
+
+    glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+        MouseEvent event(xPos, yPos, Action::MouseMove);
+        data.eventCallback(event);
+    });
+
+    glfwSetDropCallback(m_Window, [](GLFWwindow* window, int count, const char* paths[]) {
+        WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+        std::vector<std::string> droppedFiles;
+        droppedFiles.reserve(count);
+
+        for (int i = 0; i < count; ++i) {
+            droppedFiles.emplace_back(paths[i]);
+        }
+        DropEvent event(std::move(droppedFiles), Action::Drop);
+        data.eventCallback(event);
+    });
+}
 } // namespace forge

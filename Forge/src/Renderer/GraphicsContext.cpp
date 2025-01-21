@@ -22,7 +22,7 @@ Unique<GraphicsContext> GraphicsContext::Create(Shared<Window> window) {
         break;
 
     case GraphicsAPI::Vulkan:
-#ifdef FORGE_VULKAN_SUPPORT
+#ifdef RESHAPE_VULKAN_SUPPORT
         // context = CreateUnique<VulkanContext>(window);
         Log::Info("Vulkan support will be added in future updates");
 #else
@@ -31,7 +31,7 @@ Unique<GraphicsContext> GraphicsContext::Create(Shared<Window> window) {
         break;
 
     case GraphicsAPI::DirectX12:
-#ifdef FORGE_PLATFORM_WINDOWS
+#ifdef RESHAPE_PLATFORM_WINDOWS
         // context = CreateUnique<DX12Context>(window);
         Log::Info("DirectX12 support will be added in future updates");
 #else
@@ -40,7 +40,7 @@ Unique<GraphicsContext> GraphicsContext::Create(Shared<Window> window) {
         break;
 
     case GraphicsAPI::Metal:
-#ifdef FORGE_PLATFORM_MACOS
+#ifdef RESHAPE_PLATFORM_MACOS
         // context = CreateUnique<MetalContext>(window);
         Log::Info("Metal support will be added in future updates");
 #else
@@ -49,7 +49,7 @@ Unique<GraphicsContext> GraphicsContext::Create(Shared<Window> window) {
         break;
 
     case GraphicsAPI::WebGL:
-#ifdef FORGE_PLATFORM_WEB
+#ifdef RESHAPE_PLATFORM_WEB
         // context = CreateUnique<WebGLContext>(window);
         Log::Info("WebGL support will be added in future updates");
 #else

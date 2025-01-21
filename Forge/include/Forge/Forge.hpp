@@ -10,8 +10,13 @@
 #include "Utils/Platform.h"
 #include "Utils/Profiling.h"
 
+#include "Forge/Renderer/GraphicsContext.h"
 #include "Forge/Renderer/RenderAPI.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Window.h"
+
+#include "Events/Event.h"
+#include "Events/ImplEvent.h"
+#include "Events/KeyCodes.h"
 
 #endif

@@ -16,7 +16,10 @@ public:
     explicit DefaultWindow(const WindowDescriptor& descriptor);
     ~DefaultWindow() override;
 
-    void SetEventCallback(const EventCallbackFn& callback) override {}
+    void SetEventCallback(const EventCallbackFn& callback) override {
+        m_Data.eventCallback = callback;
+        SetCallBackEvents();
+    }
 
     void* GetNativeWindow() const override {
         return m_Window;
@@ -40,6 +43,8 @@ public:
     }
 
 private:
+    void SetCallBackEvents();
+
     struct WindowData {
         std::string name;
         uint32_t width{};
