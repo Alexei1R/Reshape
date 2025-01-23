@@ -12,6 +12,8 @@
 
 #include "Forge/Renderer/GraphicsContext.h"
 #include "Forge/Renderer/RenderAPI.h"
+#include "Renderer/Buffer.h"
+#include "Renderer/BufferImpl.h"
 #include "Renderer/Shader.h"
 #include "Renderer/Window.h"
 

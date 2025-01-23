@@ -26,14 +26,7 @@ enum class ShaderOrigin : uint8_t {
     String,
 };
 
-enum class ShaderResourceType {
-    UniformBuffer,
-    StorageBuffer,
-    Sampler,
-    Input,
-    Output,
-    Unknown
-};
+enum class ShaderResourceType { UniformBuffer, StorageBuffer, Sampler, Input, Output, Unknown };
 
 struct ShaderResource {
     uint32_t binding{0};
@@ -63,7 +56,7 @@ public:
     [[nodiscard]] virtual bool HasUniformBuffer(const std::string& name) const noexcept = 0;
     [[nodiscard]] virtual bool HasStorageBuffer(const std::string& name) const noexcept = 0;
     [[nodiscard]] virtual bool HasSampler(const std::string& name) const noexcept = 0;
-    
+
     [[nodiscard]] virtual const ShaderResource* FindResource(const std::string& name) const noexcept = 0;
     [[nodiscard]] virtual const ShaderResource* FindResourceByBinding(uint32_t binding, uint32_t set = 0) const noexcept = 0;
 
